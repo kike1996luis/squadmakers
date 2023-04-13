@@ -6,3 +6,4 @@ pymysql
 django-livesync
 requests
 psycopg2-binary
+python-decouple

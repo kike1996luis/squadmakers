@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-1@^&)0wt#j&+&nhcc8sp#b)xx44_0zunvfy$jxijdotahn-s8#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = config('DEBUG', default=True, cast=bool)
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Application definition
@@ -81,15 +83,16 @@ WSGI_APPLICATION = 'squadmakers.wsgi.application'
 # If you want to run with MySQL, put the ENGINE = 'django.db.backends.mysql' and port 3307, that is usually on mysql
 
 DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'squadmakers',
-            'USER': 'squadmakers',
-            'PASSWORD': '1234567890',
-            'HOST': 'localhost',
-            'PORT': '5432',
+    "default":
+        {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": config("DB_NAME"),
+            "USER": config("DB_USER"),
+            "PASSWORD": config("DB_PASSWORD"),
+            "HOST": config("DB_HOST"),
+            "PORT": 5432
         }
-    }
+}
 
 
 # Password validation
