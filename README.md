@@ -81,7 +81,7 @@ Se crearon dos aplicaciones en el proyecto de Django
 - jokes: Aplicación para manipular los endpoints de chistes, modelo y serializador.
 - maths: Aplicación para manipular los endpoints de las operaciones matemáticas.
 
-# Tecnología usada
+# Tecnología utilizada
 
 - Python 3.11.3 (Última versión actualmente)
 - Django 3.0.8
