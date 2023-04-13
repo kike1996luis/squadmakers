@@ -8,10 +8,18 @@ from rest_framework import status
 from rest_framework.views import APIView
 import requests
 
-class GetJokeAPI(generics.ListAPIView):
-    
+class UpdateJokesAPI(generics.ListAPIView):
     serializer_class = JokeSerializer
-
+    queryset = Joke.objects.all()
+    chuck = 'https://api.chucknorris.io/jokes/random'
+    dad = 'https://icanhazdadjoke.com/'
+    query_param = openapi.Parameter('joke', openapi.IN_QUERY,
+                             description="Nuevo chiste para sustituir",
+                             type=openapi.TYPE_STRING)
+    query_param1 = openapi.Parameter('number', openapi.IN_QUERY,
+                             description="Id para consulta del chiste almacenado",
+                             type=openapi.TYPE_INTEGER)
+    
     @swagger_auto_schema(
         operation_description="Obtener todos los chistes registrados",
     )
@@ -32,22 +40,6 @@ class GetJokeAPI(generics.ListAPIView):
                 "message": "Joke list obtained!"
             }
         )
-    
-class UpdateJokesAPI(generics.ListAPIView):
-    serializer_class = JokeSerializer
-    queryset = Joke.objects.all()
-    chuck = 'https://api.chucknorris.io/jokes/random'
-    dad = 'https://icanhazdadjoke.com/'
-    query_param = openapi.Parameter('joke', openapi.IN_QUERY,
-                             description="Nuevo chiste para sustituir",
-                             type=openapi.TYPE_STRING)
-    query_param1 = openapi.Parameter('number', openapi.IN_QUERY,
-                             description="Id para consulta del chiste almacenado",
-                             type=openapi.TYPE_INTEGER)
-    
-    @swagger_auto_schema(auto_schema=None)
-    def get(self, request):
-        pass
 
     @swagger_auto_schema(
         operation_description="Elimina el chiste indicado en el parámetro number",

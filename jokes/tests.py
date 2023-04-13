@@ -89,7 +89,7 @@ class JokesTestCase(TransactionTestCase):
         joke = Joke.objects.create(joke='New Test Joke')
         joke.save()
         response = self.client.get(
-            '/api/jokes/list'
+            '/api/jokes/'
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK, "Lanza 200 si la petición fue efectuada")
         self.assertEqual(2, len(response.data['jokes']), "Comprueba si hay dos chistes nuevos almacenados")
