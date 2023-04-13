@@ -118,26 +118,23 @@ Crear base de datos:
 
 ```CREATE DATABASE squadmakers;```
 
-5- Modificar el archivo settings.py del proyecto para colocar los parámetros correspondientes a su configuración de base de datos:
+5- Por seguridad y no mostrar datos sensibles, el archivo de configuración se establece con la variable de entorno de Django .env, se debe crear el archivo .env en la raíz del proyecto y establecer los parámetros de acuerdo tu configuración de conexión base de datos y tu SECRET_KEY, existe un archivo llamado .env.example de modo de ejemplo:
 
 ```
-DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'squadmakers',
-            'USER': 'USUARIO',
-            'PASSWORD': 'CONTRASEÑA',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
+SECRET_KEY=tu-clave-secreta
+DEBUG=True
+DB_NAME=squadmakers
+DB_USER=root
+DB_PASSWORD=1234
+DB_HOST=localhost
+ALLOWED_HOSTS=127.0.0.1, localhost
 ```
     
 6- Dentro del entorno virtual ejecutar migraciones con el comando:
 
 ```python manage.py migrate```
 
-7- Ejecutar el proyecto con:
+7- Finalmente, ejecutar el proyecto con:
 
 ```python manage.py runserver```
 
