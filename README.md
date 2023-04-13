@@ -64,11 +64,11 @@ Para el desarrollo de esta aplicación se tomaron en cuenta varios factores:
 
 Debido a ello se tomó la decisión de elegir como base de datos el gestor postgreSQL, debido a que a pesar de que actualmente se manejan pocos datos en él, éstos datos podrían ser fácilmente cambiantes y de mayor robustez en el tiempo, tales como: 
 
--Agregar autenticación JWT para inicio de sesión
--Crear una lista con usuarios el cuál este podría agregar sus chistes preferidos
--Conectarse y almacenar nuevos chistes por medio de API
--Consultas de registros más grandes.
--Menos sujeto a fallas.
+- Agregar autenticación JWT para inicio de sesión
+- Crear una lista con usuarios el cuál este podría agregar sus chistes preferidos
+- Conectarse y almacenar nuevos chistes por medio de API
+- Consultas de registros más grandes.
+- Menos sujeto a fallas.
 
 Esa es principalmente la razón por la cual se eligió usar un gestor de base de datos relacional, ante uno no relacional NoSQL.
 
@@ -146,24 +146,24 @@ El proyecto cuenta en total con cuatro endpoints, dos de ellos son correspondien
 
 ![image](https://user-images.githubusercontent.com/44822982/231859704-a51fb6fc-5f06-4375-8762-bc85a82dee18.png)
 
-ENDPOINT /jokes/:
+ENDPOINT ```/jokes/```:
 
 - GET: Obtiene toda la lista de chistes almacenadas.
 - POST: Agrega un nuevo chiste por query param "text".
 - PUT: Modificar chiste almacenado, tiene dos query params: "joke", el texto con el nuevo chiste y "number", el cuál corresponde al ID del chiste a modificar.
 - DELETE: Elimina chiste almacenado, tiene un query param "number", el cuál corresponde al ID del chiste a eliminar.
 
-ENDPOINT /jokes/{type}/:
+ENDPOINT ```/jokes/{type}/```:
 
 - GET: Obtiene un chiste aleatorio por medio de consulta de api, tiene un path param el cuál debe ser "Chuck"o "Dad".
 
-ENDPOINT /math/lcm/:
+ENDPOINT ```/math/lcm/```:
 
 - GET: Obtiene el mínimo común múltiplo del arreglo de enteros introducido por query param.
 
-ENDPOINT /math/plus/:
+ENDPOINT ```/math/plus/```:
 
--GET: Obtiene el cálculo del query param + 1
+- GET: Obtiene el cálculo del query param + 1
 
 Cada Endpoint lanzará un valor en diccionario llamado "success", el cuál servirá si la consulta fue satisfactoria o no en caso de conectarse con un frontend y para tomar decisiones dependiendo del caso.
 
