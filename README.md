@@ -19,14 +19,13 @@ los siguientes repositorios como base de datos:
 - https://api.chucknorris.io/
 - https://icanhazdadjoke.com/api
 
-# Tareas a realizar
+# Requisitos
 
 Crear el API REST con los siguientes endpoints y su diseño en yaml para swagger:
 
 ENDPOINT DE CHISTES
 
-- GET: Se devolverá un chiste aleatorio si no se pasa ningún path param.
-Se debe permitir buscar por nombre de Pokémon usando el endpoint adecuado. Si se envía el path param habrá que comprobar si tiene el valor “Chuck” o el valor “Dad”. Si tiene el valor “Chuck” se conseguirá el chiste de este API https://api.chucknorris.io+, si tiene el valor “Dad” se conseguirá del API https://icanhazdadjoke.com/api,  en caso de que el valor no sea ninguno de esos dos se devolverá el error correspondiente.
+- GET: Se devolverá un chiste aleatorio si no se pasa ningún path param. Si se envía el path param habrá que comprobar si tiene el valor “Chuck” o el valor “Dad”. Si tiene el valor “Chuck” se conseguirá el chiste de este API https://api.chucknorris.io, si tiene el valor “Dad” se conseguirá del API https://icanhazdadjoke.com/api,  en caso de que el valor no sea ninguno de esos dos se devolverá el error correspondiente.
 
 
 - POST: guardará en una base de datos el chiste (texto pasado por parámetro)
@@ -62,7 +61,7 @@ Para el desarrollo de esta aplicación se tomaron en cuenta varios factores:
 - Mantenibilidad
 - Robustez
 
-Debido a ello se tomó la decisión de elegir como base de datos el gestor postgreSQL, debido a que a pesar de que actualmente se manejan pocos datos en él, éstos datos podrían ser fácilmente cambiantes y de mayor robustez en el tiempo, tales como: 
+Debido a ello se tomó la decisión de elegir como base de datos el gestor postgreSQL, debido a que a pesar de que actualmente se manejan pocos datos en él, éstos datos podrían ser fácilmente cambiantes y de mayor robustez en el tiempo, se podrán tener los siguientes beneficios tales como: 
 
 - Agregar autenticación JWT para inicio de sesión
 - Crear una lista con usuarios el cuál este podría agregar sus chistes preferidos
