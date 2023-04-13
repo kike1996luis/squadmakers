@@ -120,7 +120,7 @@ Crear base de datos:
 
 ```CREATE DATABASE squadmakers;```
 
-5- Por seguridad y para no mostrar datos sensibles, el archivo de configuración se establece con la variable de entorno de Django .env, se debe crear el archivo .env en la raíz del proyecto y establecer los parámetros de acuerdo a tu configuración de conexión base de datos y tu SECRET_KEY, existe un archivo llamado .env.example de modo de ejemplo:
+5- Por seguridad y para no mostrar datos sensibles a la hora de desplegar el código en GitHub, siguiendo parte de la metodología twelve-factor el archivo de configuración se establece con la variable de entorno de Django .env, el cuál está excluido del repositorio. Se debe crear el archivo .env en la raíz del proyecto y establecer los parámetros de acuerdo a tu configuración de conexión base de datos y tu SECRET_KEY, existe un archivo llamado .env.example de modo de ejemplo:
 
 ```
 SECRET_KEY=tu-clave-secreta
