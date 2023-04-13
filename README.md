@@ -120,7 +120,8 @@ Crear base de datos:
 
 5- Modificar el archivo settings.py del proyecto para colocar los parámetros correspondientes a su configuración de base de datos:
 
-```DATABASES = {
+```
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'squadmakers',
@@ -182,7 +183,8 @@ Para ejecutar un test de manera individual se debe especificar la ruta donde se 
 
 Sentencia SQL:
 
-```CREATE DATABASE squadmakers;
+```
+CREATE DATABASE squadmakers;
 
   USE squadmakers;
   
@@ -196,7 +198,8 @@ Sentencia SQL:
 
 Sentencia NoSQL (Cassandra):
 
-```CREATE KEYSPACE squadmakers WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+```
+CREATE KEYSPACE squadmakers WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
  
   USE squadmakers;
 
