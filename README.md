@@ -1,4 +1,5 @@
 # Squadmakers
+
 Prueba técnica de Squadmakers
 
 # ¿En que consiste?
@@ -19,14 +20,13 @@ los siguientes repositorios como base de datos:
 - https://api.chucknorris.io/
 - https://icanhazdadjoke.com/api
 
-# Tareas a realizar
+# Requisitos
 
 Crear el API REST con los siguientes endpoints y su diseño en yaml para swagger:
 
 ENDPOINT DE CHISTES
 
-- GET: Se devolverá un chiste aleatorio si no se pasa ningún path param.
-Se debe permitir buscar por nombre de Pokémon usando el endpoint adecuado. Si se envía el path param habrá que comprobar si tiene el valor “Chuck” o el valor “Dad”. Si tiene el valor “Chuck” se conseguirá el chiste de este API https://api.chucknorris.io+, si tiene el valor “Dad” se conseguirá del API https://icanhazdadjoke.com/api,  en caso de que el valor no sea ninguno de esos dos se devolverá el error correspondiente.
+- GET: Se devolverá un chiste aleatorio si no se pasa ningún path param. Si se envía el path param habrá que comprobar si tiene el valor “Chuck” o el valor “Dad”. Si tiene el valor “Chuck” se conseguirá el chiste de este API https://api.chucknorris.io, si tiene el valor “Dad” se conseguirá del API https://icanhazdadjoke.com/api,  en caso de que el valor no sea ninguno de esos dos se devolverá el error correspondiente.
 
 
 - POST: guardará en una base de datos el chiste (texto pasado por parámetro)
@@ -62,7 +62,7 @@ Para el desarrollo de esta aplicación se tomaron en cuenta varios factores:
 - Mantenibilidad
 - Robustez
 
-Debido a ello se tomó la decisión de elegir como base de datos el gestor postgreSQL, debido a que a pesar de que actualmente se manejan pocos datos en él, éstos datos podrían ser fácilmente cambiantes y de mayor robustez en el tiempo, tales como: 
+Debido a ello se tomó la decisión de elegir como base de datos el gestor postgreSQL, debido a que a pesar de que actualmente se manejan pocos datos en él, éstos datos podrían ser fácilmente cambiantes y de mayor robustez en el tiempo, se podrán tener los siguientes beneficios tales como: 
 
 - Agregar autenticación JWT para inicio de sesión
 - Crear una lista con usuarios el cuál este podría agregar sus chistes preferidos
@@ -74,11 +74,10 @@ Esa es principalmente la razón por la cual se eligió usar un gestor de base de
 
 Uno de los requisitos principales de esta prueba, es usar de la interfaz Swagger para realizar una documentación de cada endpoint, debido a eso se usó el componente ```drf-yasg``` para adaptar la interfaz swagger UI en el framework Django.
 
-También se tomó la decisión de usar Django REST Framework para crear la aplicación, ya que éste framework resulta bastante robusto a la hora de crear y trabajar con Apis, apoyado con muchas librerias y una comunidad bastante de grande al cual se puede consultar en cualquier momento en caso de que se requiera hacerlo.
+También se tomó la decisión de usar Django REST Framework para crear la aplicación, ya que éste framework resulta bastante robusto a la hora de crear y trabajar con Apis, apoyado con muchas librerias y una comunidad bastante grande a la cual se puede consultar en cualquier momento en caso de que se requiera hacerlo.
 
-Se crearon tres aplicaciones en el proyecto de Django
+Se crearon dos aplicaciones en el proyecto de Django
 
-- api: Aplicación principal con las rutas.
 - jokes: Aplicación para manipular los endpoints de chistes, modelo y serializador.
 - maths: Aplicación para manipular los endpoints de las operaciones matemáticas.
 
@@ -92,7 +91,10 @@ Se crearon tres aplicaciones en el proyecto de Django
 
 # Instalación y uso
 
-1- Para instalar la aplicación se debe contar con Python en la version 3.11.3 y postgreSQL el cual puede bajarse de la página oficial.
+1- Para instalar la aplicación se debe contar con Python en la version 3.11.3 y postgreSQL 15 el cual puede bajarse de la página oficial.
+
+Python: https://www.python.org/downloads/
+PostgreSQL: https://www.postgresql.org/
 
 2- En Python lo más recomendable es usar un entorno virtual para trabajar con proyectos:
 
@@ -118,26 +120,23 @@ Crear base de datos:
 
 ```CREATE DATABASE squadmakers;```
 
-5- Modificar el archivo settings.py del proyecto para colocar los parámetros correspondientes a su configuración de base de datos:
+5- Por seguridad y para no mostrar datos sensibles a la hora de desplegar el código en GitHub, siguiendo parte de la metodología twelve-factor el archivo de configuración se establece con la variable de entorno de Django .env, el cuál está excluido del repositorio. Se debe crear el archivo .env en la raíz del proyecto y establecer los parámetros de acuerdo a tu configuración de conexión base de datos y tu SECRET_KEY, existe un archivo llamado .env.example de modo de ejemplo:
 
 ```
-DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'squadmakers',
-            'USER': 'USUARIO',
-            'PASSWORD': 'CONTRASEÑA',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
+SECRET_KEY=tu-clave-secreta
+DEBUG=True
+DB_NAME=squadmakers
+DB_USER=root
+DB_PASSWORD=1234
+DB_HOST=localhost
+ALLOWED_HOSTS=127.0.0.1, localhost
 ```
     
-6- Dentro del entorno virtual ejecutar migraciones con el comando:
+6- Dentro del entorno virtual ejecutar las migraciones con el comando:
 
 ```python manage.py migrate```
 
-7- Ejecutar el proyecto con:
+7- Finalmente, ejecutar el proyecto con:
 
 ```python manage.py runserver```
 
@@ -156,7 +155,7 @@ ENDPOINT ```/jokes/```:
 
 ENDPOINT ```/jokes/{type}/```:
 
-- GET: Obtiene un chiste aleatorio por medio de consulta de api, tiene un path param el cuál debe ser "Chuck"o "Dad".
+- GET: Obtiene un chiste aleatorio por medio de consulta de api, tiene un path param el cuál debe ser "Chuck"o "Dad", en caso de no colocar ninguno lanza error.
 
 ENDPOINT ```/math/lcm/```:
 
@@ -164,9 +163,9 @@ ENDPOINT ```/math/lcm/```:
 
 ENDPOINT ```/math/plus/```:
 
-- GET: Obtiene el cálculo del query param + 1
+- GET: Obtiene el cálculo del número introducido por query param + 1
 
-Cada Endpoint lanzará un valor en diccionario llamado "success", el cuál servirá si la consulta fue satisfactoria o no en caso de conectarse con un frontend y para tomar decisiones dependiendo del caso.
+Cada Endpoint lanzará un valor en diccionario llamado "success", el cuál servirá para saber si la consulta fue satisfactoria o no, para tomar decisiones dependiendo del caso en caso de conectarse con un frontend.
 
 # Unit Test
 
@@ -174,7 +173,7 @@ Cada endpoint tiene su test unitario, para ejecutarlos todos se debe escribir el
 
 ```python manage.py test```
 
-Para ejecutar un test de manera individual se debe especificar la ruta donde se encuentra el test, tal como este ejemplo:
+Para ejecutar un test de manera individual se debe especificar la ruta donde se encuentra el test, el cual se encuentra en el archivo tests.py de cada aplicación, tal como este ejemplo:
 
 ```python manage.py test jokes.tests.JokesTestCase.test_random_joke```
 
