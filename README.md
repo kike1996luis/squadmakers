@@ -1,4 +1,5 @@
 # Squadmakers
+
 Prueba técnica de Squadmakers
 
 # ¿En que consiste?
@@ -75,9 +76,8 @@ Uno de los requisitos principales de esta prueba, es usar de la interfaz Swagger
 
 También se tomó la decisión de usar Django REST Framework para crear la aplicación, ya que éste framework resulta bastante robusto a la hora de crear y trabajar con Apis, apoyado con muchas librerias y una comunidad bastante grande a la cual se puede consultar en cualquier momento en caso de que se requiera hacerlo.
 
-Se crearon tres aplicaciones en el proyecto de Django
+Se crearon dos aplicaciones en el proyecto de Django
 
-- api: Aplicación principal con las rutas.
 - jokes: Aplicación para manipular los endpoints de chistes, modelo y serializador.
 - maths: Aplicación para manipular los endpoints de las operaciones matemáticas.
 
