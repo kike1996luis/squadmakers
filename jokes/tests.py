@@ -19,12 +19,12 @@ class JokesTestCase(TransactionTestCase):
     #Prueba el endpoint para agregar un nuevo chiste a la base de datos
     def test_post_joke(self):
         complete_url = '{}?{}'.format(
-            '/api/jokes/add',
+            '/api/jokes/',
             '&'.join([
                 'text=New Joke Added'
             ]))
         response = self.client.post(complete_url)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED, "Verifica si la respuesta es la esperada")
         self.assertEqual(Joke.objects.all().count(), 1, "Verifica si el elemento fue agregado")
     
     #prueba el endpoint para actualizar chiste almacenado en base de datos

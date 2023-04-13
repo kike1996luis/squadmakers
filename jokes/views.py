@@ -19,6 +19,9 @@ class UpdateJokesAPI(generics.ListAPIView):
     query_param1 = openapi.Parameter('number', openapi.IN_QUERY,
                              description="Id para consulta del chiste almacenado",
                              type=openapi.TYPE_INTEGER)
+    query_param2 = openapi.Parameter('text', openapi.IN_QUERY,
+                             description="Nuevo chiste",
+                             type=openapi.TYPE_STRING)
     
     @swagger_auto_schema(
         operation_description="Obtener todos los chistes registrados",
@@ -77,17 +80,10 @@ class UpdateJokesAPI(generics.ListAPIView):
             "joke": serializer.data,
             "success": True
         }, status=status.HTTP_200_OK)
-
-class AddJokeAPI(generics.ListAPIView):
-    serializer_class = JokeSerializer
-    queryset = Joke.objects.all()
-    query_param = openapi.Parameter('text', openapi.IN_QUERY,
-                             description="Nuevo chiste",
-                             type=openapi.TYPE_STRING)
-
+    
     @swagger_auto_schema(
         operation_description="Guarda en una base de datos el chiste el texto pasado por parámetro",
-        manual_parameters=[query_param]
+        manual_parameters=[query_param2]
     )
     def post(self, request):
         serializer = self.get_serializer(data={"joke": request.query_params.get('text')})
@@ -98,10 +94,6 @@ class AddJokeAPI(generics.ListAPIView):
             "message": "New joke added",
             "success": True
         }, status=status.HTTP_201_CREATED)
-
-    @swagger_auto_schema(auto_schema=None)
-    def get(self, request):
-        pass
 
 class RandomJokeAPI(generics.ListAPIView):
     

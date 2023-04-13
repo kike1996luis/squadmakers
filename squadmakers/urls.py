@@ -4,7 +4,7 @@ from django.urls import path
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from jokes.views import UpdateJokesAPI, AddJokeAPI, RandomJokeAPI
+from jokes.views import UpdateJokesAPI, RandomJokeAPI
 from maths.views import LcmMathsAPI, PlusMathsAPI
 
 schema_view = get_schema_view(
@@ -26,8 +26,7 @@ urlpatterns = [
     # from django REST framework
 
     path('api/jokes/', UpdateJokesAPI.as_view(), name='Update and Get Jokes'),
-    path('api/jokes/<str:type>/', RandomJokeAPI.as_view(), name='Add Jokes'),
-    path('api/jokes/add', AddJokeAPI.as_view(), name='Add Joke'),
+    path('api/jokes/<str:type>/', RandomJokeAPI.as_view(), name='Random Joke'),
     path('api/math/lcm/', LcmMathsAPI.as_view(), name='Lcm Math'),
     path('api/math/plus/', PlusMathsAPI.as_view(), name='Plus one Math'),
 ]
