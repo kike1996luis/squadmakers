@@ -165,7 +165,7 @@ ENDPOINT ```/math/plus/```:
 
 - GET: Obtiene el cálculo del número introducido por query param + 1
 
-Cada Endpoint lanzará un valor en diccionario llamado "success", el cuál servirá para saber si la consulta fue satisfactoria o no, para tomar decisiones dependiendo del caso en caso de conectarse con un frontend.
+Cada Endpoint lanzará un response con un índice de dato booleano llamado "success", el cuál servirá para saber si la consulta fue satisfactoria o no, para tomar decisiones dependiendo del caso en caso de conectarse con un frontend.
 
 # Unit Test
 
